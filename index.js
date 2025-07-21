@@ -164,7 +164,7 @@ function stylizeSvgTextOnly(svgRaw, size, text) {
 ------------------------------------------------------------------- */
 function buildCircularBadge(text) {
   if (!text) return '';
-  const M  = 50;           // modules
+  const M  = 45;           // modules
   const R  = 6;            // radius (modules)  → circle = 12 × 12
   const cx = M / 2;
   const cy = M / 2;
