@@ -59,8 +59,10 @@ const Scan = mongoose.model('Scan', scanSchema);
 // Zoho Service (Optional)
 // ------------------
 async function pushToZoho(scanDoc) {
+  console.log("heu");
   if (process.env.ZOHO_ENABLE !== 'true') return;
   try {
+    console.log("zoho pushing");
     const moduleName   = process.env.ZOHO_MODULE || 'Leads';
     const productField = process.env.ZOHO_FIELD_PRODUCT || 'Product_Slug';
     const batchField   = process.env.ZOHO_FIELD_BATCH   || 'Batch_No';
@@ -77,6 +79,7 @@ async function pushToZoho(scanDoc) {
       payload,
       { headers: { Authorization: `Zoho-oauthtoken ${process.env.ZOHO_OAUTH_TOKEN}` } }
     );
+    console.log(res);
     await Scan.updateOne({_id: scanDoc._id}, { pushed_to_zoho: true, zoho_response: res.status.toString() });
   } catch (e) {
     await Scan.updateOne({_id: scanDoc._id}, { pushed_to_zoho: false, zoho_response: (e.response?.status||'')+':'+e.message });
