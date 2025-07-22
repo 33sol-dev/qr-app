@@ -183,7 +183,8 @@ function buildCircularBadge(text) {
 
 async function generateQRSvgForSlug(slugDoc) {
   const size = QR_DEFAULTS.size;
-  const baseUrl = (process.env.BASE_PUBLIC_URL || process.env.BASE_URL || '').replace(/\/$/,'');
+  const baseUrl = 'https://qr.kernseedtech.com';
+  console.log(baseUrl);
   const url = `${baseUrl}/${slugDoc.slug}`;
   const raw = await baseQRSvg(url);
   const text = (slugDoc.product_code || slugDoc.slug || '').trim();
